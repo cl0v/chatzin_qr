@@ -9,25 +9,24 @@ import '../../constants.dart';
 import 'components/chat_input_field.dart';
 import 'components/message.dart';
 
-class MessagesScreen extends StatefulWidget {
-  //TODO: Esse é o verdadeiro chat screen
+class ChatScreen extends StatefulWidget {
   final Chat chat;
-  const MessagesScreen({
+  const ChatScreen({
     required this.chat,
   });
 
   @override
-  _MessagesScreenState createState() => _MessagesScreenState();
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _MessagesScreenState extends State<MessagesScreen> {
+class _ChatScreenState extends State<ChatScreen> {
   Chat get chat => widget.chat;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: _MessagensBody(imgUrl: chat.image),
+      body: _Body(imgUrl: chat.image),
     );
   }
 
@@ -72,28 +71,28 @@ class _MessagesScreenState extends State<MessagesScreen> {
   }
 }
 
-class _MessagensBody extends StatefulWidget {
+class _Body extends StatefulWidget {
   final String imgUrl;
 
-  _MessagensBody({Key? key, required this.imgUrl}) : super(key: key);
+  _Body({Key? key, required this.imgUrl}) : super(key: key);
 
   @override
-  _MessagensBodyState createState() => _MessagensBodyState();
+  _BodyState createState() => _BodyState();
 }
 
-class _MessagensBodyState extends State<_MessagensBody> {
-  get messages => TriboController.messages;
+class _BodyState extends State<_Body> {
+  final _controller =  TriboController();
 
   @override
   void initState() {
     super.initState();
-    messages.connect();
+    _controller.messages.connect();
   }
 
   @override
   void dispose() {
     super.dispose();
-    messages.dispose();
+    _controller.messages.dispose();
   }
 
   @override
@@ -110,7 +109,7 @@ class _MessagensBodyState extends State<_MessagensBody> {
     );
 
     var streamB = StreamBuilder<List<Mensagem>>(
-        stream: messages.stream,
+        stream: _controller.messages.stream,
         builder: (context, snapshot) {
           print(snapshot);
           if (snapshot.hasData) {

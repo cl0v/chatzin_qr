@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'screens/chats/chats_screen.dart';
+import 'screens/chats/home_screen.dart';
 import 'theme.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: lightThemeData(context),
       darkTheme: darkThemeData(context),
-      home: ChatsScreen(),
+      home: HomeScreen(),
     );
   }
 }

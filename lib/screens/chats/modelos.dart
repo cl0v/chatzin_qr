@@ -46,8 +46,38 @@ class Quadro {
   factory Quadro.fromJson(String source) => Quadro.fromMap(json.decode(source));
 }
 
+class Guilda {
+  String nome;
+  String desc;
+  //TODO: Lista de membros
+  Guilda({
+    required this.nome,
+    required this.desc,
+  });
+  // String senha;??
+
+  Map<String, dynamic> toMap() {
+    return {
+      'nome': nome,
+      'desc': desc,
+    };
+  }
+
+  factory Guilda.fromMap(Map<String, dynamic> map) {
+    return Guilda(
+      nome: map['nome'],
+      desc: map['desc'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Guilda.fromJson(String source) => Guilda.fromMap(json.decode(source));
+}
+
 class Tribo {
   String nome;
+
   //Pegar a referencia
   Tribo({
     required this.nome,

@@ -1,11 +1,12 @@
-import 'package:chatzin_qr/screens/chats/messages_bloc.dart';
 import 'package:chatzin_qr/screens/chats/tribo_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 
 class ChatInputField extends StatelessWidget {
-  const ChatInputField({
+  final _controller = TriboController();
+
+  ChatInputField({
     Key? key,
   }) : super(key: key);
 
@@ -29,12 +30,6 @@ class ChatInputField extends StatelessWidget {
       child: SafeArea(
         child: Row(
           children: [
-            IconButton(
-                onPressed: () {
-                  TriboController.messages.sendMessage();
-                  print('Oxe mano');
-                },
-                icon: Icon(Icons.send, color: kPrimaryColor)),
             SizedBox(width: kDefaultPadding),
             Expanded(
               child: Container(
@@ -64,23 +59,12 @@ class ChatInputField extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Icon(
-                      Icons.attach_file,
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .color!
-                          .withOpacity(0.64),
-                    ),
+                    IconButton(
+                        onPressed: () {
+                          _controller.messages.sendMessage();
+                        },
+                        icon: Icon(Icons.send, color: kPrimaryColor)),
                     SizedBox(width: kDefaultPadding / 4),
-                    Icon(
-                      Icons.camera_alt_outlined,
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .color!
-                          .withOpacity(0.64),
-                    ),
                   ],
                 ),
               ),
