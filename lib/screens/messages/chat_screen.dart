@@ -3,14 +3,14 @@ import 'package:chatzin_qr/screens/chats/modelos.dart';
 import 'package:chatzin_qr/screens/chats/tribo_controller.dart';
 import 'package:flutter/material.dart';
 
-import 'package:chatzin_qr/models/Chat.dart';
+import 'package:chatzin_qr/models/oldChat.dart';
 
 import '../../constants.dart';
 import 'components/chat_input_field.dart';
 import 'components/message.dart';
 
 class ChatScreen extends StatefulWidget {
-  final Chat chat;
+  final OldChat chat;
   const ChatScreen({
     required this.chat,
   });
@@ -20,7 +20,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  Chat get chat => widget.chat;
+  OldChat get chat => widget.chat;
 
   @override
   Widget build(BuildContext context) {
@@ -97,16 +97,16 @@ class _BodyState extends State<_Body> {
 
   @override
   Widget build(BuildContext context) {
-    var listviewB = ListView.builder(
-      itemCount: demeChatMessages.length,
-      itemBuilder: (context, index) {
-        return Message(
-          msg: 'snap[index].mensagem',
-          message: demeChatMessages[index],
-          imgUrl: widget.imgUrl,
-        );
-      },
-    );
+    // var listviewB = ListView.builder(
+    //   itemCount: demeChatMessages.length,
+    //   itemBuilder: (context, index) {
+    //     return Message(
+    //       msg: 'snap[index].mensagem',
+    //       message: demeChatMessages[index],
+    //       imgUrl: widget.imgUrl,
+    //     );
+    //   },
+    // );
 
     var streamB = StreamBuilder<List<Mensagem>>(
         stream: _controller.messages.stream,
@@ -120,7 +120,7 @@ class _BodyState extends State<_Body> {
                 itemBuilder: (context, index) {
                   return Message(
                     msg: snap[index].mensagem,
-                    message: demeChatMessages.first,
+                    // message: demeChatMessages.first,
                     imgUrl: widget.imgUrl,
                   );
                 },

@@ -8,17 +8,17 @@ class Message extends StatelessWidget {
   const Message({
     Key? key,
     required this.msg,
-    required this.message,
+    // required this.message,
     required this.imgUrl,
   }) : super(key: key);
 
   final String msg;
   final String imgUrl;
-  final ChatMessage message;
+  // final ChatMessage message;
 
   @override
   Widget build(BuildContext context) {
-    Widget messageContaint(ChatMessage message) {
+    Widget messageContaint(String message) {
       return TextMessage(message: message);
     }
 
@@ -26,17 +26,19 @@ class Message extends StatelessWidget {
       padding: const EdgeInsets.only(top: kDefaultPadding),
       child: Row(
         mainAxisAlignment:
-            message.isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+            // message.isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+            MainAxisAlignment.start,
         children: [
-          if (!message.isSender) ...[
+          // if (!message.isSender) 
+          ...[
             CircleAvatar(
               radius: 12,
               backgroundImage: AssetImage(imgUrl),
             ),
             SizedBox(width: kDefaultPadding / 2),
           ],
-          messageContaint(message),
-          if (message.isSender) MessageStatusDot()
+          TextMessage(message: msg),
+          // if (message.isSender) MessageStatusDot()
         ],
       ),
     );

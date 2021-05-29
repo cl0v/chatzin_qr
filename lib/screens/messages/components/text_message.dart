@@ -1,5 +1,4 @@
 
-import 'package:chatzin_qr/models/ChatMessage.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
@@ -7,10 +6,10 @@ import '../../../constants.dart';
 class TextMessage extends StatelessWidget {
   const TextMessage({
     Key? key,
-    this.message,
+    required this.message,
   }) : super(key: key);
 
-  final ChatMessage? message;
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +22,18 @@ class TextMessage extends StatelessWidget {
         vertical: kDefaultPadding / 2,
       ),
       decoration: BoxDecoration(
-        color: kPrimaryColor.withOpacity(message!.isSender ? 1 : 0.1),
+        color: kPrimaryColor.withOpacity(0.1),
+        // color: kPrimaryColor.withOpacity(message!.isSender ? 1 : 0.1),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Text(
-        message!.text,
+        message,
+        // message!.text,
         style: TextStyle(
-          color: message!.isSender
-              ? Colors.white
-              : Theme.of(context).textTheme.bodyText1!.color,
+          color:
+          //  message!.isSender
+          //     ? Colors.white :
+               Theme.of(context).textTheme.bodyText1!.color,
         ),
       ),
     );

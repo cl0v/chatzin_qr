@@ -1,71 +1,43 @@
-class Chat {
-  final String name, lastMessage, image, time;
-  final bool isActive;
+import 'dart:convert';
 
-  Chat({
-    this.name = '',
-    this.lastMessage = '',
-    this.image = '',
-    this.time = '',
-    this.isActive = false,
-  });
+enum ChatCategory {
+  Tribo,
+  Guilda,
 }
 
-List chatsData = [
-  Chat(
-    name: "Tribo",
-    lastMessage: "Chat geral para seu CPF",
-    image: "assets/images/user.png",
-    time: "3m ago", //TODO: Remover time
-    isActive: false, //TODO: Provavelmente remover isso tambem
-  ),
-  Chat(
-    name: "Esther Howard",
-    lastMessage: "Hello Abdullah! I am...",
-    image: "assets/images/user_2.png",
-    time: "8m ago",
-    isActive: true,
-  ),
-  Chat(
-    name: "Ralph Edwards",
-    lastMessage: "Do you have update...",
-    image: "assets/images/user_3.png",
-    time: "5d ago",
-    isActive: false,
-  ),
-  Chat(
-    name: "Jacob Jones",
-    lastMessage: "You’re welcome :)",
-    image: "assets/images/user_4.png",
-    time: "5d ago",
-    isActive: true,
-  ),
-  Chat(
-    name: "Albert Flores",
-    lastMessage: "Thanks",
-    image: "assets/images/user_5.png",
-    time: "6d ago",
-    isActive: false,
-  ),
-  Chat(
-    name: "Jenny Wilson",
-    lastMessage: "Hope you are doing well...",
-    image: "assets/images/user.png",
-    time: "3m ago",
-    isActive: false,
-  ),
-  Chat(
-    name: "Esther Howard",
-    lastMessage: "Hello Abdullah! I am...",
-    image: "assets/images/user_2.png",
-    time: "8m ago",
-    isActive: true,
-  ),
-  Chat(
-    name: "Ralph Edwards",
-    lastMessage: "Do you have update...",
-    image: "assets/images/user_3.png",
-    time: "5d ago",
-    isActive: false,
-  ),
-];
+class Chat {
+  String title;
+  String desc;
+  //TODO: Data de entrada
+  //TODO: Data de ultima mensagem
+  //TODO: Notificacoes mais recentes(data)
+  //enum
+  ChatCategory categoria; //Se é guilda ou tribo Se eu achar q precisa, boto um tabview
+  //TODO: Provavelmente receber a referencia pra um acesso direto ao chat
+
+  Chat({
+    required this.title,
+    required this.desc,
+    required this.categoria,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'desc': desc,
+      'categoria': categoria.index,
+    };
+  }
+
+  factory Chat.fromMap(Map<String, dynamic> map) {
+    return Chat(
+      title: map['title'],
+      desc: map['desc'],
+      categoria: ChatCategory.values[map['categoria']],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Chat.fromJson(String source) => Chat.fromMap(json.decode(source));
+}

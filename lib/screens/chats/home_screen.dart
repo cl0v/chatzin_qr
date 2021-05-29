@@ -1,4 +1,6 @@
-import 'package:chatzin_qr/models/Chat.dart';
+import 'package:chatzin_qr/models/oldChat.dart';
+import 'package:chatzin_qr/models/user.dart';
+import 'package:chatzin_qr/screens/chats/home_bloc.dart';
 import 'package:chatzin_qr/screens/messages/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'components/chat_card.dart';
@@ -9,33 +11,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late final HomeBloc _bloc;
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(),
-      body: _Body(),
-      //TODO: Adicionar Fab para adicionar novas tribos pra facilitar o acesso
-
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    /*User.get().then((user)=>_bloc=HomeBloc(user:user));
+    */
+    _bloc = HomeBloc(
+      user: User(
+        id: 'tgAErOQtETQT8AMJQqy9mXx8h6X2',
+        imgUrl: "assets/images/user.png",
+        name: 'Marcelo',
+      ),
     );
   }
 
-  AppBar buildAppBar() {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      title: Text("Chats"),
-      centerTitle: true,
-    );
-  }
-}
-
-class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    final body = ListView.builder(
       itemCount: chatsData.length,
       itemBuilder: (context, index) => ChatCard(
         chat: chatsData[index],
-        press: () => Navigator.push(
+        onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => ChatScreen(
@@ -45,5 +43,21 @@ class _Body extends StatelessWidget {
         ),
       ),
     );
+
+    final appBar = AppBar(
+      automaticallyImplyLeading: false,
+      title: Text("Guilda"),
+    );
+    return Scaffold(
+        appBar: appBar,
+        body: body,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(
+            Icons.add,
+          ),
+        )
+        //TODO: Adicionar Fab para adicionar novas tribos pra facilitar o acesso
+        );
   }
 }

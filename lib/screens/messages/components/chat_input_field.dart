@@ -30,7 +30,7 @@ class ChatInputField extends StatelessWidget {
       child: SafeArea(
         child: Row(
           children: [
-            SizedBox(width: kDefaultPadding),
+            // SizedBox(width: kDefaultPadding),
             Expanded(
               child: Container(
                 padding: EdgeInsets.symmetric(
@@ -42,14 +42,15 @@ class ChatInputField extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.sentiment_satisfied_alt_outlined,
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .color!
-                          .withOpacity(0.64),
-                    ),
+                    // Icon(
+                    //   Icons.sentiment_satisfied_alt_outlined,
+                    //   color: Theme.of(context)
+                    //       .textTheme
+                    //       .bodyText1!
+                    //       .color!
+                    //       .withOpacity(0.64),
+                    //TODO: VOltar emotis
+                    // ),
                     SizedBox(width: kDefaultPadding / 4),
                     Expanded(
                       child: TextField(
@@ -59,14 +60,19 @@ class ChatInputField extends StatelessWidget {
                         ),
                       ),
                     ),
-                    IconButton(
-                        onPressed: () {
-                          _controller.messages.sendMessage();
-                        },
-                        icon: Icon(Icons.send, color: kPrimaryColor)),
-                    SizedBox(width: kDefaultPadding / 4),
                   ],
                 ),
+              ),
+            ),
+
+            SizedBox(width: kDefaultPadding / 3),
+            IconButton(
+              onPressed: () {
+                _controller.messages.sendMessage();
+              },
+              icon: Icon(
+                Icons.send,
+                color: kPrimaryColor,
               ),
             ),
           ],
